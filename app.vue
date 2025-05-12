@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TopMenu />
+    <AppHeader />
     <div class="page-content">
       <NuxtPage />
     </div>
@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 // Nuxt 3 auto-imports components from the components/ directory,
-// so TopMenu should be available without explicit import here.
+// so AppHeader and TheFooter are available without explicit imports here.
 </script>
 
 <style>
