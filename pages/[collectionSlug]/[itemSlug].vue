@@ -50,7 +50,8 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-const PAYLOAD_API_URL = 'http://localhost:3333/api';
+// const PAYLOAD_API_URL = 'http://localhost:3333/api'; // Removed hardcoded URL
+const config = useRuntimeConfig(); // Use Nuxt's runtime config
 
 // Define a more generic type for page data as structure varies
 interface BlockData {
@@ -85,7 +86,7 @@ async function fetchPage(collection: string, slug: string) {
     error.value = null;
     // Fetch by slug. Payload returns an array in `docs`.
     // Using depth=1 to fetch basic block data. Increase if needed for nested relations in blocks.
-    const response = await fetch(`${PAYLOAD_API_URL}/${collection}?where[slug][equals]=${slug}&limit=1&depth=1`);
+    const response = await fetch(`${config.public.apiUrl}/${collection}?where[slug][equals]=${slug}&limit=1&depth=1`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

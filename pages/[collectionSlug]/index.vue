@@ -23,7 +23,8 @@
 import { ref, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-const PAYLOAD_API_URL = 'http://localhost:3333/api';
+// const PAYLOAD_API_URL = 'http://localhost:3333/api'; // Removed hardcoded URL
+const config = useRuntimeConfig(); // Use Nuxt's runtime config
 
 interface BaseItem {
   id: string;
@@ -52,12 +53,12 @@ const pageTitle = computed(() => {
   return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 });
 
-async function fetchItems(slug: string) {
+  async function fetchItems(slug: string) {
   if (!slug) return;
   try {
     pending.value = true;
     error.value = null;
-    const response = await fetch(`${PAYLOAD_API_URL}/${slug}?limit=20&depth=0`); // depth=0 for list view
+    const response = await fetch(`${config.public.apiUrl}/${slug}?limit=20&depth=0`); // depth=0 for list view
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status} for slug ${slug}`);
     }

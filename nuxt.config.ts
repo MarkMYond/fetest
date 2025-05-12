@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:3333/api', // Default for local, overridden by env var in production
+      apiUrl: `${process.env.NUXT_PUBLIC_API_URL || 'http://localhost:3333'}/api`, // Default for local, overridden by env var in production
     }
   }
 })
