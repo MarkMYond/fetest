@@ -1,80 +1,73 @@
 <template>
   <div>
-    <h1>Frontend Test (Nuxt 3)</h1>
-    
-    <h2>Web Pages from Payload:</h2>
-    <div v-if="pending">Loading web pages...</div>
-    <div v-else-if="error">Error fetching web pages: {{ error.message }}</div>
-    <ul v-else-if="webPages && webPages.docs && webPages.docs.length">
-      <li v-for="page in webPages.docs" :key="page.id">
-        {{ page.title }} (Slug: {{ page.slug }})
-      </li>
-    </ul>
-    <div v-else>No web pages found.</div>
-
-    <hr style="margin: 20px 0;" />
-
-    <h2>Raw Web Pages Data:</h2>
-    <pre v-if="!pending && !error">{{ webPages }}</pre>
+    <TopMenu />
+    <div class="page-content">
+      <NuxtPage />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-
-const PAYLOAD_API_URL = 'http://localhost:3333/api';
-
-interface WebPage {
-  id: string;
-  title: string;
-  slug: string;
-  // Add other fields if you expect them
-}
-
-interface PayloadResponse {
-  docs: WebPage[];
-  totalDocs: number;
-  limit: number;
-  totalPages: number;
-  page: number;
-  pagingCounter: number;
-  hasPrevPage: boolean;
-  hasNextPage: boolean;
-  prevPage: number | null;
-  nextPage: number | null;
-}
-
-const webPages = ref<PayloadResponse | null>(null);
-const pending = ref(true);
-const error = ref<Error | null>(null);
-
-onMounted(async () => {
-  try {
-    pending.value = true;
-    error.value = null;
-    const response = await fetch(`${PAYLOAD_API_URL}/web-pages?limit=10`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    webPages.value = await response.json();
-  } catch (e: any) {
-    console.error('Failed to fetch web pages:', e);
-    error.value = e;
-  } finally {
-    pending.value = false;
-  }
-});
+// Nuxt 3 auto-imports components from the components/ directory,
+// so TopMenu should be available without explicit import here.
 </script>
 
 <style>
+/* Global styles */
 body {
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #fdfdfd;
+}
+
+.page-content {
   padding: 20px;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #111;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 8px;
+}
+
 pre {
   background-color: #f4f4f4;
-  padding: 10px;
+  padding: 15px;
   border-radius: 5px;
   overflow-x: auto;
+  border: 1px solid #eee;
+  font-size: 0.9em;
+}
+
+/* Basic styling for a table, if data includes tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
 }
 </style>
