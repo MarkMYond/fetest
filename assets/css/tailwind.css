@@ -5,7 +5,7 @@
 /* Font face definitions */
 @font-face {
   font-family: 'Rebond Grotesque';
-  src: url('/fonts/woff2/ESRebondGrotesque-Regular.woff2') format('woff2');
+  src: url('../fonts/woff2/ESRebondGrotesque-Regular.woff2') format('woff2');
   font-weight: 400; /* Regular */
   font-style: normal;
   font-display: swap; /* Use swap for better performance */
@@ -13,7 +13,7 @@
 
 @font-face {
   font-family: 'Rebond Grotesque';
-  src: url('/fonts/woff2/ESRebondGrotesque-Semibold.woff2') format('woff2');
+  src: url('../fonts/woff2/ESRebondGrotesque-Semibold.woff2') format('woff2');
   font-weight: 600; /* Semibold */
   font-style: normal;
   font-display: swap; /* Use swap for better performance */
@@ -21,7 +21,7 @@
 
 @font-face {
   font-family: 'Rebond Grotesque';
-  src: url('/fonts/woff2/ESRebondGrotesque-Bold.woff2') format('woff2');
+  src: url('../fonts/woff2/ESRebondGrotesque-Bold.woff2') format('woff2');
   font-weight: 700; /* Bold */
   font-style: normal;
   font-display: swap; /* Use swap for better performance */

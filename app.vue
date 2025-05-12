@@ -16,7 +16,7 @@
 <style>
 /* Global styles */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Rebond Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
   color: #333;

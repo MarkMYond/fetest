@@ -118,7 +118,7 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		fontFamily: {
-  			sans: ['ESRebondGrotesque', '"ES Rebond Grotesque TRIAL"', 'Inter', 'sans-serif'],
+  			sans: ['Rebond Grotesque', 'ESRebondGrotesque', '"ES Rebond Grotesque TRIAL"', 'Inter', 'sans-serif'],
   		},
   		keyframes: {
         'slide-ltr': {

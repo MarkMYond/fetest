@@ -1,6 +1,23 @@
 <template>
   <div v-if="pending">Loading page content...</div>
-  <div v-else-if="error">Error fetching page: {{ error.message }}</div>
+  <div v-else-if="error">
+    <p>Error fetching page: {{ error.message }}</p>
+    <div class="mt-4" v-if="error.message.includes('Invalid collection')">
+      <p>Available collections include:</p>
+      <ul class="available-collections">
+        <li><code>categories</code></li>
+        <li><code>media</code></li>
+        <li><code>templates</code></li>
+        <li><code>web-pages</code></li>
+        <li><code>wiki-pages</code></li>
+        <li><code>registry-pages</code></li>
+        <li><code>users</code></li>
+        <li><code>payload-locked-documents</code></li>
+        <li><code>payload-preferences</code></li>
+        <li><code>payload-migrations</code></li>
+      </ul>
+    </div>
+  </div>
   <div v-else-if="pageData">
     <h1>{{ pageData.title || pageData.name || pageData.filename }}</h1>
     
@@ -81,9 +98,30 @@ const error = ref<Error | null>(null);
 
 async function fetchPage(collection: string, slug: string) {
   if (!collection || !slug) return;
+  
+  // List of valid collections based on payload-types.ts
+  const validCollections = [
+    'users', 
+    'media', 
+    'categories', 
+    'web-pages', 
+    'wiki-pages', 
+    'registry-pages', 
+    'templates',
+    'payload-locked-documents',
+    'payload-preferences',
+    'payload-migrations'
+  ];
+  
   try {
     pending.value = true;
     error.value = null;
+    
+    // Validate the collection name before making the request
+    if (!validCollections.includes(collection)) {
+      throw new Error(`Invalid collection: "${collection}". This collection does not exist in the API.`);
+    }
+    
     // Fetch by slug. Payload returns an array in `docs`.
     // Using depth=1 to fetch basic block data. Increase if needed for nested relations in blocks.
     const response = await fetch(`${config.public.apiUrl}/${collection}?where[slug][equals]=${slug}&limit=1&depth=1`);
@@ -134,5 +172,20 @@ h3 {
 h4 {
   font-style: italic;
   color: #777;
+}
+.available-collections {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+.available-collections li {
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-bottom: 5px;
 }
 </style>
