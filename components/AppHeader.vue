@@ -37,16 +37,16 @@
             Join Waitlist
           </NuxtLink>
 
-          <!-- Icon Buttons -->
+          <!-- Icon Buttons - Using Icon component instead of direct Phosphor imports -->
           <div class="hidden lg:flex items-center space-x-2">
              <button type="button" aria-label="Search" class="p-2 rounded-full bg-brand-primary text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-primary focus:ring-white">
-               <PhMagnifyingGlass :size="20" weight="bold" />
+               <Icon name="ph:magnifying-glass-bold" class="w-5 h-5" />
              </button>
              <button type="button" aria-label="Ask" class="p-2 rounded-full bg-brand-primary text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-primary focus:ring-white">
-               <PhChatCircleDots :size="20" weight="bold" />
+               <Icon name="ph:chat-circle-dots-bold" class="w-5 h-5" />
              </button>
              <button type="button" aria-label="Login" class="p-2 rounded-full bg-brand-primary text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-primary focus:ring-white">
-               <PhUserCircle :size="20" weight="bold" />
+               <Icon name="ph:user-circle-bold" class="w-5 h-5" />
              </button>
           </div>
 
@@ -92,7 +92,7 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div
       v-show="isMobileMenuOpen"
-      class="lg:hidden border-t border-brand-50" <!-- Changed border-gray-200 to border-brand-50 -->
+      class="lg:hidden border-t border-brand-50"
       id="mobile-menu"
     >
       <div class="pt-2 pb-3 space-y-1">
@@ -109,7 +109,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { PhMagnifyingGlass, PhChatCircleDots, PhUserCircle } from '@phosphor-icons/vue';
+// Using Icon component from @nuxt/icon instead of importing from @phosphor-icons/vue
 
 const isMobileMenuOpen = ref(false);
 </script>
